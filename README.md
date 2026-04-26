@@ -9,13 +9,10 @@ Cartes: Les cartes fetes amb SVG són com les originals dels PNG però amb lleug
 Menús: Totes les opcions necessàries implementades. La de jugar, la de puntuacions per veure el top 10, les opcions i el registre de partides guardades. També hi ha el botó de sortir, però no està implementat.
 
 Modes de joc: 
-
 Mode 1: Un únic nivell que fa servir les opcions seleccionades al menú d’opcions i que guanyes menys punts en funció dels errors.
-
 Mode 2: Conjunt de nivells que es van complicant, tens un màxim de tres vides per nivell i la dificultat del menú d’opcions influeix en la dificultat inicial.
 
 Descripció de la implementació:
-
 El codi està separat en lògica interna i la part visual. Això permet canviar com es veu el joc sense tantes complicacions. Perquè les cartes no surtin en una sola línia, he fet servir el residu % i la divisió per situar-les automàticament en files i columnes de quatre. He mapejat les tecles de direcció perquè sumin o restin posicions a l'índex de la carta seleccionada (+1 o -1 per als costats i +4 o -4 per moure's entre files). L'Enter crida directament la funció de girar carta que ja tenia definida. Finalment, es fa servir el localStorage per guardar dades que no s'han d'esborrar (com el rànquing i les configuracions) i el sessionStorage per a la informació de la partida actual, com el nivell on es troba el jugador al Mode 2.
 
 Conclusions i problemes trobats:
