@@ -190,8 +190,6 @@ export function clickCard(indx){
 				}
 			} else {
 				game.score -= 25;
-                alert ("Has perdut");
-                window.location.assign("../");
             }
         }
         game.lastCard = [];

@@ -20,7 +20,7 @@
 		}
 		console.log(alias);
         sessionStorage.removeItem('load');
-        window.location.assign("./html/game.html");
+        window.location.assign("./html/canvasgame.html");
     });
 
     o.on('click', 
@@ -59,7 +59,7 @@
             return;
         }
         sessionStorage.load = to_load;
-        window.location.assign("./html/game.html");
+        window.location.assign("./html/canvasgame.html");
     });
 
     e.on('click', 

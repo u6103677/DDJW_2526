@@ -21,15 +21,17 @@ if (canvas){
 function start(){
     selectCards();
     cards = gameItems.map((c)=>{return {texture:c}});
-    loadCardResource("../resources/back.png");
+    loadCardResource("../resources/back.svg");
     cards.forEach((card, indx) => {
         loadCardResource(card.texture);
         initCard(val => card.texture = val);
+		let col= indx % 4;
+		let row = Math.floor(indx / 4);
         card.position = {
-            xMin: 2+100*indx,
-            xMax: 2+100*indx + c_w,
-            yMin: 0,
-            yMax: c_h
+            xMin: 50 + (col * 120),
+            xMax: 50 + (col * 120) + c_w,
+            yMin: 50 + (row * 150),
+            yMax: 50 + (row * 150) + c_h
         }
         card.onClick = function(x, y){
             return x >= this.position.xMin && x <= this.position.xMax &&
@@ -69,7 +71,7 @@ function draw(){
         if (res.ready){
             if (idxSel === indx)
                 canvas.drawImage(res.image, card.position.xMin, 
-                                card.position.yMin, c_w + 4, c_h + 4);
+                                card.position.yMin, c_w + 10, c_h + 10);
             else
                 canvas.drawImage(res.image, card.position.xMin, 
                                     card.position.yMin, c_w, c_h);
@@ -102,12 +104,12 @@ function checkInput(){
                 break;
             default:
                 console.warn("Tecla "+key+" no reconeguda.");
-        }
-        if (idxSel != prevIndx){
-            if (prevIndx >= 0) {
-                cards[prevIndx].position.xMin += 2;
-            }
-            cards[idxSel].position.xMin -= 2;
+			case "ArrowDown":
+				if (idxSel + 4 < cards.length) idxSel += 4;
+                break;
+			case "ArrowUp":
+				if (idxSel - 4 >= 0) idxSel -= 4;
+                break;
         }
     }
     e_click.click = key = false;
