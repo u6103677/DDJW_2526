@@ -130,8 +130,8 @@ var game = {
         .catch (err => console.error(err));
 
         if (!ret) {
-            console.warn("La partida s'ha guardat en local.");
-            localStorage.save = to_save;
+			let nom = prompt("Amb quin nom vols guardar la partida?");
+			if (nom) localStorage.setItem("save_" + nom, to_save);
         }
         window.location.assign("../");
     }

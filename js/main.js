@@ -31,6 +31,17 @@
     s.on('click', 
     function(){
         let to_load = localStorage.save;
+		let partides = Object.keys(localStorage).filter(k => k.startsWith("save_"));
+		if (partides.length === 0) return alert("No hi ha cap partida guardada!");
+        if (partides.length > 0) {
+            let llista = "";
+            partides.forEach((p, i) => llista += (i + 1) + ". " + p.replace("save_", "") + "\n");
+            let tria = prompt("Tria el número de la partida:\n" + llista);
+			if (!tria) return;
+            if (tria && partides[tria - 1]) {
+                to_load = localStorage.getItem(partides[tria - 1]);
+            }
+        }
         fetch('../php/load.php', {
             method: "POST",
             body: JSON.stringify({}),
