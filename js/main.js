@@ -3,9 +3,21 @@
 	var o = $('#options');
 	var s = $('#saves');
 	var e = $('#exit');
+	var sc = $('#scores');
     p.on('click', 
     function(){
         let alias = prompt("Quin és el teu àlies?");
+		sessionStorage.alias=alias || "Anònim";
+		sessionStorage.removeItem('score');
+		let mode = prompt("Quin mode vols jugar? (1 o 2)", "1");
+		sessionStorage.mode=mode;
+		if (mode === "2") {
+			let opt = JSON.parse(localStorage.options || '{}');
+			let startLevel=1;
+			if (opt.difficulty === 'normal') startLevel = 3;
+			if (opt.difficulty === 'hard') startLevel = 5;
+			sessionStorage.mode2Level = startLevel;
+		}
 		console.log(alias);
         sessionStorage.removeItem('load');
         window.location.assign("./html/game.html");
@@ -44,3 +56,16 @@
         console.warn("No es pot sortir!");
     });
 	
+	sc.on('click', function() {
+    let ranking = JSON.parse(localStorage.ranking || "[]");
+    if (ranking.length === 0) {
+        alert("Encara no hi ha puntuacions!");
+        return;
+    }
+	let text = "TOP 10\n";
+	ranking.forEach((p, i) => {
+        text += `${i + 1}. ${p.alias}: ${p.score} punts\n`;
+    });
+    
+    alert(text);
+});

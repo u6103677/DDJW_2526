@@ -40,3 +40,9 @@ button.center:active{
 	max-width: 800px;
 	margin: 20px auto;
 }
+
+img {
+    width: 100px;
+    height: 140px;
+    cursor: pointer;
+}
